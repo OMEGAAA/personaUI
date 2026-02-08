@@ -1,0 +1,1557 @@
+/* =========================================
+   Persona 5 Style UI
+   赤×黒×白 斜め・アグレッシブなデザイン
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+:root {
+  --persona-red: #ff0000;
+  --persona-dark-red: #cc0000;
+  --persona-black: #0a0a0a;
+  --persona-dark: #1a1a1a;
+  --persona-white: #ffffff;
+  --persona-gray: #2a2a2a;
+  --persona-light-gray: #cccccc;
+  --persona-yellow: #ffdd00;
+  --skew-angle: -3deg;
+  --card-skew: -2deg;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Noto Sans JP', 'Segoe UI', sans-serif;
+  background: var(--persona-black);
+  color: var(--persona-white);
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background:
+    repeating-linear-gradient(135deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 0, 0, 0.03) 10px,
+      rgba(255, 0, 0, 0.03) 20px),
+    var(--persona-black);
+}
+
+/* =========================================
+   Header - Persona Style
+   ========================================= */
+
+.header {
+  background: var(--persona-red);
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--persona-black);
+  box-shadow: 0 4px 0 var(--persona-dark-red);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(90deg,
+      transparent,
+      transparent 40px,
+      rgba(0, 0, 0, 0.1) 40px,
+      rgba(0, 0, 0, 0.1) 80px);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: var(--persona-black);
+  transform: rotate(45deg);
+}
+
+.header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 8px;
+  color: var(--persona-white);
+  text-shadow:
+    3px 3px 0 var(--persona-black),
+    -1px -1px 0 var(--persona-black);
+  position: relative;
+  z-index: 1;
+  transform: skewX(var(--skew-angle));
+}
+
+.header-subtitle {
+  font-size: 0.7rem;
+  color: var(--persona-black);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  transform: skewX(var(--skew-angle));
+}
+
+/* =========================================
+   Navigation - Aggressive Tabs
+   ========================================= */
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--persona-black);
+  border-top: 4px solid var(--persona-red);
+  display: flex;
+  z-index: 1000;
+  padding: 0;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  color: var(--persona-light-gray);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
+  background: var(--persona-dark);
+  transition: all 0.15s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 4px;
+  stroke: currentColor;
+  stroke-width: 2.5;
+}
+
+.nav-item.active {
+  background: var(--persona-red);
+  color: var(--persona-white);
+  transform: skewX(var(--skew-angle));
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--persona-yellow);
+}
+
+.nav-item:not(.active):hover {
+  background: var(--persona-gray);
+  color: var(--persona-red);
+}
+
+/* =========================================
+   Main Content
+   ========================================= */
+
+.main-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.screen {
+  display: none;
+  animation: slideIn 0.3s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px) skewX(-5deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0);
+  }
+}
+
+/* =========================================
+   Cards - Persona Style
+   ========================================= */
+
+.card {
+  background: var(--persona-dark);
+  border: 3px solid var(--persona-gray);
+  border-left: 6px solid var(--persona-red);
+  padding: 16px;
+  margin-bottom: 12px;
+  position: relative;
+  transform: skewX(var(--card-skew));
+  transition: all 0.15s ease;
+}
+
+.card>* {
+  transform: skewX(calc(var(--card-skew) * -1));
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, transparent 50%, var(--persona-red) 50%);
+}
+
+.card:hover {
+  border-color: var(--persona-red);
+  box-shadow: 4px 4px 0 var(--persona-red);
+  transform: skewX(var(--card-skew)) translateX(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--persona-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   Stats Card (パラメータカード)
+   ========================================= */
+
+.stat-card {
+  background:
+    linear-gradient(135deg, var(--persona-dark) 0%, var(--persona-gray) 100%);
+}
+
+.stat-value-container {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--persona-white);
+  text-shadow: 2px 2px 0 var(--persona-red);
+}
+
+.stat-rank {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 2px 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transform: skewX(-10deg);
+  display: inline-block;
+}
+
+.rank-s {
+  background: var(--persona-yellow);
+  color: var(--persona-black);
+  box-shadow: 3px 3px 0 var(--persona-red);
+}
+
+.rank-a {
+  background: var(--persona-red);
+  color: var(--persona-white);
+}
+
+.rank-b {
+  background: var(--persona-white);
+  color: var(--persona-black);
+}
+
+.rank-c {
+  background: var(--persona-gray);
+  color: var(--persona-white);
+}
+
+.rank-d {
+  background: var(--persona-black);
+  color: var(--persona-light-gray);
+  border: 2px solid var(--persona-gray);
+}
+
+.stat-progress {
+  height: 10px;
+  background: var(--persona-black);
+  border: 2px solid var(--persona-gray);
+  margin-top: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(90deg,
+      transparent,
+      transparent 8px,
+      rgba(255, 255, 255, 0.1) 8px,
+      rgba(255, 255, 255, 0.1) 10px);
+}
+
+.stat-progress-bar {
+  height: 100%;
+  background: var(--persona-red);
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.stat-progress-bar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--persona-yellow);
+}
+
+.stat-next-rank {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--persona-light-gray);
+  margin-top: 6px;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   Action Cards (行動カード)
+   ========================================= */
+
+.action-card {
+  cursor: pointer;
+  border-left-color: var(--persona-yellow);
+}
+
+.action-card:active {
+  transform: skewX(var(--card-skew)) scale(0.98);
+  background: var(--persona-red);
+}
+
+.action-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.action-effect {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: var(--persona-black);
+  color: var(--persona-white);
+  border: 2px solid var(--persona-red);
+  transform: skewX(-5deg);
+  text-transform: uppercase;
+}
+
+.action-effect.positive {
+  border-color: var(--persona-yellow);
+  color: var(--persona-yellow);
+}
+
+.action-effect.negative {
+  border-color: #666;
+  color: #999;
+}
+
+/* =========================================
+   History (履歴)
+   ========================================= */
+
+.history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: var(--persona-dark);
+  border-left: 4px solid var(--persona-red);
+  margin-bottom: 8px;
+  transform: skewX(var(--card-skew));
+}
+
+.history-item>* {
+  transform: skewX(calc(var(--card-skew) * -1));
+}
+
+.history-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  color: var(--persona-red);
+  min-width: 50px;
+  letter-spacing: 1px;
+}
+
+.history-content {
+  flex: 1;
+}
+
+.history-action-name {
+  font-weight: 900;
+  color: var(--persona-white);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.history-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.history-effect {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: var(--persona-black);
+  border: 1px solid var(--persona-gray);
+}
+
+.history-effect.positive {
+  color: var(--persona-yellow);
+  border-color: var(--persona-yellow);
+}
+
+.history-effect.negative {
+  color: var(--persona-light-gray);
+}
+
+.history-date-header {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--persona-red);
+  padding: 12px 0 8px;
+  margin-bottom: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 3px solid var(--persona-red);
+  position: relative;
+}
+
+.history-date-header::after {
+  content: '▶';
+  position: absolute;
+  right: 0;
+  color: var(--persona-yellow);
+}
+
+/* =========================================
+   Settings (設定)
+   ========================================= */
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--persona-red);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding-left: 12px;
+  border-left: 4px solid var(--persona-yellow);
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--persona-dark);
+  border: 2px solid var(--persona-gray);
+  border-left: 4px solid var(--persona-red);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  transform: skewX(var(--card-skew));
+}
+
+.settings-item>* {
+  transform: skewX(calc(var(--card-skew) * -1));
+}
+
+.settings-item:hover {
+  background: var(--persona-gray);
+  border-color: var(--persona-red);
+}
+
+.settings-item-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--persona-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.settings-item-arrow {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--persona-red);
+  font-size: 1.5rem;
+}
+
+/* =========================================
+   Buttons - Persona Style
+   ========================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  transform: skewX(-5deg);
+}
+
+.btn>* {
+  transform: skewX(5deg);
+}
+
+.btn-primary {
+  background: var(--persona-red);
+  color: var(--persona-white);
+  border: 3px solid var(--persona-dark-red);
+  box-shadow: 4px 4px 0 var(--persona-black);
+}
+
+.btn-primary:hover {
+  background: var(--persona-yellow);
+  color: var(--persona-black);
+  transform: skewX(-5deg) translateY(-2px);
+  box-shadow: 6px 6px 0 var(--persona-red);
+}
+
+.btn-secondary {
+  background: var(--persona-dark);
+  color: var(--persona-white);
+  border: 3px solid var(--persona-gray);
+}
+
+.btn-secondary:hover {
+  border-color: var(--persona-red);
+  color: var(--persona-red);
+}
+
+.btn-danger {
+  background: var(--persona-black);
+  color: var(--persona-red);
+  border: 3px solid var(--persona-red);
+}
+
+.btn-danger:hover {
+  background: var(--persona-red);
+  color: var(--persona-white);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* =========================================
+   Modal - Persona Style
+   ========================================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  padding: 16px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: var(--persona-dark);
+  border: 4px solid var(--persona-red);
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  transform: skewX(var(--card-skew)) scale(0.9);
+  transition: transform 0.2s ease;
+}
+
+.modal>* {
+  transform: skewX(calc(var(--card-skew) * -1));
+}
+
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, transparent 50%, var(--persona-yellow) 50%);
+}
+
+.modal-overlay.active .modal {
+  transform: skewX(var(--card-skew)) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--persona-red);
+}
+
+.modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--persona-white);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.modal-close {
+  width: 36px;
+  height: 36px;
+  background: var(--persona-red);
+  border: none;
+  color: var(--persona-white);
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: skewX(-10deg);
+}
+
+.modal-close:hover {
+  background: var(--persona-yellow);
+  color: var(--persona-black);
+}
+
+/* =========================================
+   Forms - Persona Style
+   ========================================= */
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--persona-light-gray);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--persona-black);
+  border: 3px solid var(--persona-gray);
+  color: var(--persona-white);
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--persona-red);
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.3);
+}
+
+.form-input::placeholder {
+  color: var(--persona-gray);
+}
+
+/* =========================================
+   Toast - Persona Style
+   ========================================= */
+
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px) skewX(-5deg);
+  background: var(--persona-red);
+  color: var(--persona-white);
+  padding: 14px 28px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 3px solid var(--persona-yellow);
+  z-index: 3000;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0) skewX(-5deg);
+  opacity: 1;
+}
+
+.toast.success {
+  background: var(--persona-yellow);
+  color: var(--persona-black);
+  border-color: var(--persona-red);
+}
+
+.toast.error {
+  background: var(--persona-black);
+  border-color: var(--persona-red);
+}
+
+/* =========================================
+   Empty State
+   ========================================= */
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--persona-light-gray);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.empty-state-text {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   Stats Grid (ダッシュボード用)
+   ========================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 360px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stats-grid .stat-card {
+  padding: 14px;
+}
+
+.stats-grid .stat-value {
+  font-size: 2rem;
+}
+
+/* =========================================
+   Summary Card - Persona Menu Style
+   ========================================= */
+
+.summary-card {
+  background: var(--persona-red);
+  border: 4px solid var(--persona-black);
+  border-left: 8px solid var(--persona-yellow);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 20px,
+      rgba(0, 0, 0, 0.1) 20px,
+      rgba(0, 0, 0, 0.1) 40px);
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--persona-white);
+  text-shadow: 2px 2px 0 var(--persona-black);
+  letter-spacing: 2px;
+}
+
+.summary-stat-label {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: var(--persona-black);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   Scrollbar - Persona Style
+   ========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--persona-black);
+  border-left: 2px solid var(--persona-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--persona-red);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--persona-yellow);
+}
+
+/* =========================================
+   Screen Headers
+   ========================================= */
+
+.screen h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: var(--persona-red);
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 4px solid var(--persona-yellow);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   Persona 5 Star Chart (5芒星グラフ)
+   ========================================= */
+
+.star-chart-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.star-chart {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+.star-outline {
+  fill: var(--persona-gray);
+  stroke: #444;
+  stroke-width: 2;
+}
+
+.star-fill {
+  fill: url(#starGradient);
+  stroke: var(--persona-yellow);
+  stroke-width: 2;
+}
+
+.star-label-bg {
+  fill: var(--persona-black);
+  stroke: var(--persona-yellow);
+  stroke-width: 2;
+}
+
+.star-label-name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  fill: var(--persona-yellow);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.star-label-level {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  fill: var(--persona-white);
+  text-anchor: start;
+  dominant-baseline: middle;
+}
+
+.star-label-rank {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 7px;
+  font-weight: 700;
+  fill: var(--persona-light-gray);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* Legacy radar chart styles (kept for compatibility) */
+.radar-chart-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.radar-chart {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+}
+
+/* =========================================
+   Star Rating (星評価)
+   ========================================= */
+
+.stat-stars {
+  font-size: 1.2rem;
+  color: var(--persona-yellow);
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 var(--persona-red);
+  margin-bottom: 4px;
+}
+
+.stat-rank-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: var(--persona-white);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.stat-value-small {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  color: var(--persona-light-gray);
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   Summary Card Updates
+   ========================================= */
+
+.summary-header {
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--persona-white);
+  text-shadow: 2px 2px 0 var(--persona-black);
+  letter-spacing: 4px;
+}
+
+.summary-card {
+  background: var(--persona-dark);
+  border: 4px solid var(--persona-red);
+  border-left: 8px solid var(--persona-yellow);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  transform: skewX(0);
+}
+
+.summary-card>* {
+  transform: skewX(0);
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 20px,
+      rgba(255, 0, 0, 0.05) 20px,
+      rgba(255, 0, 0, 0.05) 40px);
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 16px 0;
+  background: var(--persona-red);
+  margin: 0 -16px -16px -16px;
+}
+
+.summary-stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--persona-white);
+  text-shadow: 2px 2px 0 var(--persona-black);
+  letter-spacing: 2px;
+}
+
+.summary-stat-label {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--persona-black);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   Stats Grid Adjustments
+   ========================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 380px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stats-grid .stat-card {
+  padding: 12px;
+}
+
+.stats-grid .card-header {
+  margin-bottom: 6px;
+}
+
+.stats-grid .stat-progress {
+  margin-top: 8px;
+}
+
+/* =========================================
+   Note Animation (音符アニメーション)
+   ========================================= */
+
+.note-animation-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5000;
+  pointer-events: none;
+  width: 200px;
+  height: 200px;
+}
+
+.note-animation {
+  position: absolute;
+  font-size: 3rem;
+  color: var(--persona-yellow);
+  text-shadow:
+    2px 2px 0 var(--persona-red),
+    0 0 20px rgba(255, 221, 0, 0.8);
+  animation: noteFloat 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes noteFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5) rotate(-15deg);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.2) rotate(5deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-60px) scale(1) rotate(-10deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.8) rotate(15deg);
+  }
+}
+
+.points-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: var(--persona-yellow);
+  text-shadow:
+    3px 3px 0 var(--persona-red),
+    -1px -1px 0 var(--persona-black),
+    0 0 30px rgba(255, 221, 0, 0.6);
+  animation: pointsPop 1s ease-out forwards;
+  letter-spacing: 4px;
+}
+
+@keyframes pointsPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -70%) scale(0.8);
+  }
+}
+
+/* =========================================
+   Persona 5 Calendar (横スクロールカレンダー)
+   ========================================= */
+
+#calendar-container {
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+
+.calendar-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--persona-white);
+  letter-spacing: 2px;
+}
+
+.calendar-month {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--persona-red);
+  margin-left: 8px;
+  text-shadow: 2px 2px 0 var(--persona-black);
+}
+
+.calendar-month-label {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--persona-white);
+}
+
+.calendar-days-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.calendar-days-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-days {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0;
+  min-width: max-content;
+}
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 4px;
+  background: var(--persona-dark);
+  border: 2px solid var(--persona-gray);
+  transition: all 0.3s ease;
+  position: relative;
+  min-width: 50px;
+}
+
+.calendar-day.past {
+  opacity: 0.4;
+}
+
+.calendar-day.future {
+  opacity: 0.7;
+}
+
+.calendar-day.today {
+  opacity: 1;
+  background: var(--persona-red);
+  border-color: var(--persona-yellow);
+  transform: scale(1.15);
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.calendar-day.weekend .calendar-date {
+  color: var(--persona-red);
+}
+
+.calendar-day.sunday .calendar-date {
+  color: #ff6666;
+}
+
+.calendar-day.today .calendar-date {
+  color: var(--persona-white);
+}
+
+/* 位置によるサイズ調整（中央が大きい） */
+.calendar-day.pos-0 {
+  min-width: 70px;
+  padding: 12px 8px;
+}
+
+.calendar-day.pos-1 {
+  min-width: 55px;
+}
+
+.calendar-day.pos-2 {
+  min-width: 45px;
+}
+
+.calendar-day.pos-3 {
+  min-width: 40px;
+}
+
+.calendar-date {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--persona-white);
+  line-height: 1;
+  text-shadow: 1px 1px 0 var(--persona-black);
+}
+
+.calendar-day.pos-0 .calendar-date {
+  font-size: 2.8rem;
+}
+
+.calendar-day.pos-1 .calendar-date {
+  font-size: 2rem;
+}
+
+.calendar-day.pos-2 .calendar-date {
+  font-size: 1.6rem;
+}
+
+.calendar-day.pos-3 .calendar-date {
+  font-size: 1.3rem;
+}
+
+.calendar-weekday-en {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.6rem;
+  color: var(--persona-light-gray);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.calendar-day.pos-0 .calendar-weekday-en {
+  font-size: 0.8rem;
+}
+
+.calendar-day.pos-2 .calendar-weekday-en,
+.calendar-day.pos-3 .calendar-weekday-en {
+  display: none;
+}
+
+.calendar-weekday-jp {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: var(--persona-yellow);
+  margin-top: 2px;
+}
+
+.calendar-day.pos-0 .calendar-weekday-jp {
+  font-size: 0.9rem;
+}
+
+
+.calendar-day.today .calendar-weekday-en,
+.calendar-day.today .calendar-weekday-jp {
+  color: var(--persona-white);
+}
+
+/* =========================================
+   Coop List (コープリスト)
+   ========================================= */
+
+.coop-list-container {
+  padding: 10px;
+}
+
+.coop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.coop-item {
+  display: flex;
+  align-items: center;
+  background: var(--persona-black);
+  color: var(--persona-white);
+  padding: 15px 20px;
+  transform: skewX(-10deg);
+  border-left: 5px solid var(--persona-gray);
+  border-right: 2px solid var(--persona-gray);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.coop-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.coop-item:active,
+.coop-item:hover {
+  background: var(--persona-white);
+  color: var(--persona-black);
+  border-left-color: var(--persona-red);
+  transform: skewX(-10deg) translateX(10px);
+}
+
+.coop-item:active::before,
+.coop-item:hover::before {
+  transform: translateX(100%);
+}
+
+.coop-item-arcana {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  width: 60px;
+  text-align: center;
+  margin-right: 15px;
+  background: var(--persona-black);
+  color: var(--persona-white);
+  padding: 2px 5px;
+  transform: skewX(10deg);
+  /* テキストの歪みを戻す */
+  border: 1px solid var(--persona-white);
+}
+
+.coop-item:hover .coop-item-arcana {
+  background: var(--persona-red);
+  color: var(--persona-white);
+  border-color: var(--persona-black);
+}
+
+.coop-item-name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-grow: 1;
+  transform: skewX(10deg);
+  /* テキストの歪みを戻す */
+  letter-spacing: 1px;
+}
+
+.coop-item-rank {
+  transform: skewX(10deg);
+  /* テキストの歪みを戻す */
+}
+
+.coop-stars {
+  color: var(--persona-yellow);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.coop-item:hover .coop-stars {
+  color: var(--persona-red);
+  text-shadow: 0 0 1px var(--persona-black);
+}
+
+.coop-category-title {
+  display: none;
+  /* リスト形式ではカテゴリタイトル非表示 */
+}
+
+/* 詳細モーダル用スタイル */
+.coop-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.coop-detail-action-btn {
+  font-size: 0.9rem;
+  padding: 10px 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--persona-gray);
+  color: var(--persona-white);
+}
+
+.coop-detail-action-btn:hover {
+  background: var(--persona-red);
+  border-color: var(--persona-red);
+  color: var(--persona-white);
+}
+
+.coop-progress {
+  height: 6px;
+  background: var(--persona-gray);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+.coop-progress-bar {
+  height: 100%;
+  background: var(--persona-yellow);
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.coop-logs {
+  max-height: 150px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.coop-log-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+}
+
+.coop-log-item:last-child {
+  border-bottom: none;
+}
+
+.coop-log-points {
+  color: var(--persona-yellow);
+  font-weight: bold;
+}
+
+.coop-log-date {
+  color: var(--persona-light-gray);
+  font-size: 0.8rem;
+}

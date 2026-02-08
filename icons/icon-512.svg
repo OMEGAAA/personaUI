@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#E60012" rx="100"/>
+  
+  <!-- Radial Burst (Jagged Background) -->
+  <g fill="#000000">
+    <path d="M256 256 L150 -50 L200 -50 Z" />
+    <path d="M256 256 L300 -50 L400 -50 Z" />
+    <path d="M256 256 L562 100 L562 200 Z" />
+    <path d="M256 256 L562 350 L562 450 Z" />
+    <path d="M256 256 L400 562 L300 562 Z" />
+    <path d="M256 256 L200 562 L100 562 Z" />
+    <path d="M256 256 L-50 400 L-50 300 Z" />
+    <path d="M256 256 L-50 200 L-50 100 Z" />
+    
+    <!-- Extra spikes -->
+    <path d="M256 256 L50 20 L80 0 Z" />
+    <path d="M256 256 L480 30 L520 60 Z" />
+    <path d="M256 256 L480 480 L440 520 Z" />
+    <path d="M256 256 L30 480 L0 440 Z" />
+  </g>
+
+  <!-- Eye Shape -->
+  <g transform="translate(0, 10)">
+    <!-- Outer Eye (Black) -->
+    <path d="M50 256 Q256 50 462 256 Q256 462 50 256 Z" fill="#000000"/>
+    
+    <!-- Inner Eye (Red Background) -->
+    <path d="M80 256 Q256 90 432 256 Q256 422 80 256 Z" fill="#E60012"/>
+    
+    <!-- Pupil (Black) -->
+    <circle cx="256" cy="256" r="90" fill="#000000"/>
+    
+    <!-- Star (Red inside pupil) - Star shape points -->
+    <!-- Center 256,256. Radius ~40 -->
+    <polygon points="256,216 268,248 302,248 274,268 284,300 256,280 228,300 238,268 210,248 244,248" fill="#E60012" transform="translate(0, -5) scale(1.2)" transform-origin="256 256"/>
+  </g>
+</svg>
