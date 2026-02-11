@@ -31,7 +31,28 @@ function formatTime(isoString) {
 }
 
 // 履歴アイテムのHTML生成
+// 履歴アイテムのHTML生成
 function renderHistoryItem(entry) {
+    if (entry.type === 'money') {
+        const isIncome = entry.amount > 0;
+        const sign = isIncome ? '+' : '';
+        const className = isIncome ? 'positive' : 'negative';
+        const icon = isIncome ? '💰' : '💸';
+        const label = isIncome ? 'INCOME' : 'EXPENSE';
+
+        return `
+        <div class="history-item money-log">
+          <span class="history-time">${formatTime(entry.timestamp)}</span>
+          <div class="history-content">
+            <div class="history-action-name">${icon} ${label}</div>
+            <div class="history-effects">
+                <span class="history-effect ${className}">¥ ${sign}${Math.abs(entry.amount).toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     const effectsHtml = entry.effects.map(effect => {
         const sign = effect.value >= 0 ? '+' : '';
         const className = effect.value >= 0 ? 'positive' : 'negative';

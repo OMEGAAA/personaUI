@@ -11,18 +11,23 @@
     <title>PERSONA - STATUS MANAGER</title>
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/personaUI/manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.svg">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/todo.css">
     <link rel="stylesheet" href="css/mementos.css">
+    <link rel="stylesheet" href="css/money.css">
 </head>
 
 <body>
     <!-- Header -->
     <header class="header">
+        <div class="money-display-container" id="money-display">
+            <span class="yen-mark">¥</span>
+            <span class="money-amount" id="money-amount">0</span>
+        </div>
         <h1>PERSONA</h1>
         <p class="header-subtitle">HUMAN PARAMETER SYSTEM</p>
     </header>
@@ -51,6 +56,12 @@
         <div id="screen-history" class="screen">
             <h2>ACTION LOG</h2>
             <div id="history-content"></div>
+        </div>
+
+        <!-- Money Screen -->
+        <div id="screen-money" class="screen">
+            <h2>ASSETS MANAGER</h2>
+            <div id="money-content"></div>
         </div>
 
         <!-- Settings Screen -->
@@ -93,6 +104,14 @@
             </svg>
             LOG
         </button>
+        <button class="nav-item" data-screen="money">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M6 12h.01M18 12h.01"></path>
+            </svg>
+            ASSETS
+        </button>
         <button class="nav-item" data-screen="settings">
             <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"></circle>
@@ -121,6 +140,7 @@
     <script src="js/coop.js"></script>
     <script src="js/todo.js"></script>
     <script src="js/mementos.js"></script>
+    <script src="js/money.js"></script>
     <script src="js/app.js"></script>
 </body>
 

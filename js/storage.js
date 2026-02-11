@@ -7,7 +7,8 @@ const STORAGE_KEYS = {
     STATS: 'persona_stats',
     ACTIONS: 'persona_actions',
     HISTORY: 'persona_history',
-    SETTINGS: 'persona_settings'
+    SETTINGS: 'persona_settings',
+    MONEY: 'persona_money'
 };
 
 // Persona 5 パラメータ定義
@@ -106,6 +107,9 @@ function initializeStorage() {
     if (!loadData(STORAGE_KEYS.SETTINGS)) {
         saveData(STORAGE_KEYS.SETTINGS, { darkMode: true });
     }
+    if (loadData(STORAGE_KEYS.MONEY) === null) {
+        saveData(STORAGE_KEYS.MONEY, 0);
+    }
 }
 
 // パラメータ取得
@@ -190,6 +194,30 @@ function importData(data) {
         return true;
     } catch (e) {
         console.error('Import error:', e);
+
         return false;
     }
+}
+
+// 所持金取得
+function getMoney() {
+    const money = loadData(STORAGE_KEYS.MONEY);
+    return money !== null ? Math.floor(parseInt(money)) : 0;
+}
+
+// 所持金保存
+function saveMoney(amount) {
+    return saveData(STORAGE_KEYS.MONEY, amount);
+}
+
+// 所持金加算（負の値で減算）
+function updateMoney(amount) {
+    const current = getMoney();
+    const info = {
+        amount: amount,
+        before: current,
+        after: current + amount
+    };
+    saveMoney(info.after);
+    return info;
 }

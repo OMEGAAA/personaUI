@@ -117,27 +117,29 @@ function renderStatCard(stat, compact = false) {
 function renderStarChart(stats) {
   const size = 320;
   const center = size / 2;
-  const maxOuterRadius = 100;
-  const maxInnerRadius = 40;
+  const maxOuterRadius = 90;
+  const maxInnerRadius = 35;
 
   // 各パラメータのレベル（1-5）を取得
+  // 順序: Knowledge(0), Guts(1), Proficiency(2), Kindness(3), Charm(4)
+  // 5芒星の頂点順序に合わせてマッピングが必要ならここで行う
+  // stats配列の順番が Knowledge, Guts, Proficiency, Kindness, Charm であると仮定
   const levels = stats.map(stat => calculateRankLevel(stat) + 1);
 
-  // 5芒星の頂点を計算（パラメータごとにサイズが異なる）
-  // 外側頂点はパラメータのレベルに対応、内側頂点は隣接パラメータの平均
   function getStarPointsWithLevels(levelArray) {
     const points = [];
     for (let i = 0; i < 10; i++) {
+      // -PI/2 (上) からスタート
       const angle = (Math.PI * 2 * i / 10) - Math.PI / 2;
       let radius;
 
       if (i % 2 === 0) {
-        // 外側頂点（各パラメータのレベルに対応）
+        // 外側頂点
         const paramIndex = i / 2;
         const level = levelArray[paramIndex];
         radius = maxOuterRadius * (level / 5);
       } else {
-        // 内側頂点（隣接する2つのパラメータの平均）
+        // 内側頂点
         const leftIndex = Math.floor(i / 2);
         const rightIndex = (leftIndex + 1) % 5;
         const avgLevel = (levelArray[leftIndex] + levelArray[rightIndex]) / 2;
@@ -152,7 +154,7 @@ function renderStarChart(stats) {
     return points;
   }
 
-  // 5角形の頂点位置（ラベル用）
+  // ラベル位置（半径を少し大きめに）
   function getPentagonPoint(index, radius) {
     const angle = (Math.PI * 2 * index / 5) - Math.PI / 2;
     return {
@@ -161,41 +163,52 @@ function renderStarChart(stats) {
     };
   }
 
-  // グレーの外枠星（最大サイズ = レベル5相当）
+  // グレーの外枠星（最大サイズ）
   const maxLevels = [5, 5, 5, 5, 5];
   const outerStarPoints = getStarPointsWithLevels(maxLevels);
   const outerStarPath = outerStarPoints.map((p, i) =>
     (i === 0 ? 'M' : 'L') + p.x + ',' + p.y
   ).join(' ') + ' Z';
 
-  // 黄色の内側星（各パラメータのレベルに基づく）
+  // 黄色の内側星
   const innerStarPoints = getStarPointsWithLevels(levels);
   const innerStarPath = innerStarPoints.map((p, i) =>
     (i === 0 ? 'M' : 'L') + p.x + ',' + p.y
   ).join(' ') + ' Z';
 
-  // 各頂点にラベルを配置
+  // ラベル生成
   let labelsHtml = '';
 
   stats.forEach((stat, i) => {
     const level = calculateRankLevel(stat) + 1;
     const rankName = getRankName(stat);
-    const p = getPentagonPoint(i, 130);
+    // ラベル位置調整
+    const labelRadius = 145;
+    const p = getPentagonPoint(i, labelRadius);
 
-    // ラベルバッジ
+    // 背景装飾（ランダムな回転など）
+    const rotation = (i * 72) % 360;
+
     labelsHtml += `
-      <g class="star-label-group" transform="translate(${p.x}, ${p.y})">
-        <circle r="28" class="star-label-bg"/>
-        <text y="-6" class="star-label-name">${stat.name}</text>
-        <text y="-6" x="24" class="star-label-level">${level}</text>
-        <text y="12" class="star-label-rank">${rankName}</text>
+      <g class="p5-stat-label-group" transform="translate(${p.x}, ${p.y})">
+        <!-- 背景の黒い "ステッカー" 風 -->
+        <path d="M-35,-25 L35,-30 L40,20 L-30,25 Z" class="p5-label-bg" fill="#000" />
+        
+        <!-- パラメータ名 (Knowledge etc) -->
+        <text y="-8" class="p5-stat-name">${stat.name}</text>
+        
+        <!-- レベル番号 (右下、黄色) -->
+        <text x="30" y="0" class="p5-stat-rank-num">${level}</text>
+        
+        <!-- ランク名 (平均的、など) -->
+        <text y="18" class="p5-stat-desc">${rankName}</text>
       </g>
     `;
   });
 
   return `
     <div class="star-chart-container">
-      <svg viewBox="0 0 ${size} ${size}" class="star-chart">
+      <svg viewBox="0 0 ${size} ${size}" class="star-chart" style="overflow: visible;">
         <defs>
           <filter id="star-glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -211,12 +224,12 @@ function renderStarChart(stats) {
         </defs>
         
         <!-- 背景ストライプ -->
-        <rect width="${size}" height="${size}" fill="none"/>
+        <path d="${outerStarPath}" fill="none" class="star-gray-bg" style="stroke: #333; stroke-width: 1; fill: rgba(50,50,50,0.5);" />
         
         <!-- グレーの外枠星 -->
         <path d="${outerStarPath}" class="star-outline"/>
         
-        <!-- 黄色の内側星（各パラメータのレベルに応じたサイズ） -->
+        <!-- 黄色の内側星 -->
         <path d="${innerStarPath}" class="star-fill" filter="url(#star-glow)"/>
         
         <!-- 各頂点のラベル -->

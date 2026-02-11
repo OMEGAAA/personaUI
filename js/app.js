@@ -47,6 +47,9 @@ function renderCurrentScreen() {
     case 'history':
       renderHistoryScreen();
       break;
+    case 'money':
+      renderMoneyScreen();
+      break;
     case 'settings':
       renderSettingsScreen();
       break;
@@ -893,6 +896,11 @@ function initApp() {
   // ストレージ初期化
   initializeStorage();
 
+  // 所持金表示初期化
+  if (typeof initMoneyDisplay === 'function') {
+    initMoneyDisplay();
+  }
+
   // ナビゲーションイベント設定
   document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -916,7 +924,7 @@ function initApp() {
 
 // スワイプナビゲーション設定
 function setupSwipeNavigation() {
-  const screens = ['dashboard', 'actions', 'coop', 'history', 'settings'];
+  const screens = ['dashboard', 'actions', 'coop', 'history', 'money', 'settings'];
   let touchStartX = 0;
   let touchStartY = 0;
   let touchEndX = 0;

@@ -1,15 +1,15 @@
-const CACHE_NAME = 'persona-v17';
+const CACHE_NAME = 'persona-v18';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
-  '/js/storage.js',
-  '/js/stats.js',
-  '/js/actions.js',
-  '/js/history.js',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg'
+  './',
+  './index.html',
+  './css/styles.css',
+  './js/app.js',
+  './js/storage.js',
+  './js/stats.js',
+  './js/actions.js',
+  './js/history.js',
+  './icons/icon-192.svg',
+  './icons/icon-512.svg'
 ];
 
 // インストール時にキャッシュ

@@ -1,0 +1,87 @@
+/* Money Display Styles */
+
+.money-display-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #000;
+    color: #fff;
+    padding: 5px 15px;
+    border: 2px solid #fff;
+    /* 白枠 */
+    transform: skew(-10deg) rotate(-2deg);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 120px;
+    justify-content: flex-end;
+}
+
+.money-display-container:hover {
+    transform: skew(-10deg) rotate(-2deg) scale(1.05);
+    border-color: var(--persona-yellow);
+    color: var(--persona-yellow);
+}
+
+.yen-mark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+.money-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* Modal Styles for Money */
+.money-current-wrapper {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+    transform: skew(-5deg);
+    border: 1px solid var(--persona-gray);
+    text-align: center;
+}
+
+.money-current-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--persona-light-gray);
+    margin-bottom: 5px;
+}
+
+.money-current-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--persona-yellow);
+}
+
+.yen-symbol {
+    font-size: 1.5rem;
+    vertical-align: super;
+}
+
+/* Responsive adjust */
+@media (max-width: 480px) {
+    .money-display-container {
+        top: 5px;
+        right: 5px;
+        padding: 4px 10px;
+        transform: skew(-10deg) scale(0.85);
+        /* 少し小さく */
+    }
+
+    .header {
+        /* ヘッダーのタイトルと被らないように調整が必要なら */
+        padding-right: 120px;
+    }
+}

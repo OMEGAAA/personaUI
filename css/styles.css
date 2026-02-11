@@ -949,30 +949,52 @@ body {
   stroke-width: 2;
 }
 
-.star-label-name {
+/* P5 Style Labels */
+.p5-stat-label-group {
+  /* Using foreignObject or just grouping */
+  overflow: visible;
+}
+
+.p5-label-bg {
+  fill: var(--persona-black);
+  stroke: var(--persona-white);
+  stroke-width: 2px;
+  transform: skewX(-10deg) rotate(-5deg) scale(1.3);
+}
+
+.p5-stat-name {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 900;
   fill: var(--persona-yellow);
+  stroke: var(--persona-black);
+  stroke-width: 4px;
+  paint-order: stroke;
   text-anchor: middle;
   dominant-baseline: middle;
+  transform: rotate(-5deg);
 }
 
-.star-label-level {
+.p5-stat-rank-num {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
-  fill: var(--persona-white);
-  text-anchor: start;
-  dominant-baseline: middle;
-}
-
-.star-label-rank {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 7px;
-  font-weight: 700;
-  fill: var(--persona-light-gray);
+  font-size: 22px;
+  fill: var(--persona-yellow);
+  stroke: var(--persona-black);
+  stroke-width: 4px;
+  paint-order: stroke;
   text-anchor: middle;
   dominant-baseline: middle;
+  transform: rotate(-5deg);
+}
+
+.p5-stat-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--persona-white);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  transform: rotate(-5deg);
 }
 
 /* Legacy radar chart styles (kept for compatibility) */
