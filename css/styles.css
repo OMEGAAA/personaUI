@@ -761,12 +761,15 @@ body {
   border: 3px solid var(--persona-yellow);
   z-index: 3000;
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .toast.show {
   transform: translateX(-50%) translateY(0) skewX(-5deg);
   opacity: 1;
+  visibility: visible;
 }
 
 .toast.success {
